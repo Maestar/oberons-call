@@ -1,0 +1,18 @@
+.game-button{
+    color: lightblue;
+    font-family: 'Aref Ruqaa', serif;
+    font-size: 1.5em;
+    font-weight: 700;
+    width: 492px;
+    height: 81px;
+    background-color: transparent;
+    border: none;
+    background-image: url('/images/button-bg.png');
+    transition: color .5s;
+    padding-bottom: 15px;
+    cursor: pointer;
+}
+
+.game-button:hover{
+    color: white;
+}

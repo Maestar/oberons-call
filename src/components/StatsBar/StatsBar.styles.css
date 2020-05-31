@@ -1,0 +1,7 @@
+.stat-container{
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    margin: .6rem 0;
+    align-self: flex-start;
+}

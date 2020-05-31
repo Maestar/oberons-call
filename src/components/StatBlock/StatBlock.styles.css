@@ -1,0 +1,28 @@
+.stat-block{
+    margin-right: 1rem;
+    background-color: #221f24;
+    padding: 5px;
+    border-radius: 4px;
+}
+
+.stat-number{
+    margin: 0 10px;
+    font-size: 1.1em;
+    font-family: 'Josefin Sans', sans-serif;
+}
+
+.wood{
+    color: burlywood;
+}
+
+.stone{
+    color: gainsboro;
+}
+
+.gold{
+    color: gold;
+}
+
+.glamour{
+    color: lightcyan;
+}
