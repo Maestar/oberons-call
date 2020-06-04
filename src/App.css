@@ -2,12 +2,22 @@ html{
   font-family: 'Aref Ruqaa', serif;
 }
 
-.App {
+.flex{
   display: flex;
   flex-direction: column;
-  width: 500px;
-  height: 90vh;
   align-items: center;
+}
+
+.flex-centered{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.App {
+  width: 500px;
+  height: 750px;
   margin: 1rem auto;
   background-color: #322f35;
   padding: 0 1rem;
@@ -16,6 +26,11 @@ html{
   box-shadow: 0 10px  #221f24;
 }
 
+
+
+.fade-in{
+  animation: fadein 2s;
+}
 .dialogue{
   color: lightblue;
   font-size: 1.1em;
@@ -23,3 +38,26 @@ html{
   margin: 1rem 0;
 }
 
+.rendered{
+  display: block;
+  animation: fadein 2s;
+
+}
+
+@keyframes fadein {
+  from{ opacity: 0;}
+  to {opacity: 1;}
+}
+
+.hidden{
+  display: none;
+}
+
+.fade-out{
+  animation: fadeout 2s;
+}
+
+@keyframes fadeout {
+  from{ opacity: 1;}
+  to {opacity: 0;}
+}

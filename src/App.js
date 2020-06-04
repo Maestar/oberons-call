@@ -9,6 +9,9 @@ class App extends React.Component {
 
   //move all the art into an art atlas.
   state = {
+    paragraphRender: 'rendered',
+    bannerRender: 'hidden',
+    fadeout: '',
     bannerArt: 'images/banner-oberon.png',
     bannerDesc: 'Lord Oberon, sealed in his Prison.',
     gold: 102,
@@ -19,8 +22,9 @@ class App extends React.Component {
     stoneArt: 'images/stone-icon.png',
     glamour: 3,
     glamourArt: 'images/glamour-icon.png',
-    currentDialogue: 'So long have you slumbered, O Prince of Shadow and Briar, that mankind has forgotten you...',
+    currentDialogue: "Absent is the sound of humanity, from this tomb they've made for you. ",
     buttonText: 'Call for Puck',
+    newGame: true
 
   };
 
@@ -39,13 +43,93 @@ class App extends React.Component {
     }
   }
 
+  gameStartCutscene = () => {
+    let stage = 0;
+    this.setState({ bannerArt:'images/banner-castle.png'});
+    const intervalId = setInterval(() =>{
+      switch(stage){
+        case 0:
+          this.setState({fadeout: 'fade-out'});
+          setTimeout(() => {
+            this.setState({fadeout: '', currentDialogue:'The courtyard of your prison lays silent, tonight the bells of your keepers are finally dormant.',paragraphRender:'hidden',  bannerRender: 'rendered'})
+          }, 2000);
+          stage++;
+          break;
+        case 1:
+          this.setState({fadeout: 'fade-out'});
+          setTimeout(() => {
+            this.setState({fadeout: '', bannerArt:'images/banner-courtyard.png', paragraphRender: 'rendered', bannerRender: 'hidden'});
+          }, 2000);
+          stage++;
+          break;
+        case 2:
+          this.setState({fadeout: 'fade-out'});
+          setTimeout(() => {
+            this.setState({fadeout: '', currentDialogue:'So long have you slumbered, O Prince of Shadow and Briar, that mankind has forgotten you...',paragraphRender: 'hidden', bannerRender: 'rendered'});
+          }, 2000);
+            stage++;
+          break;
+        case 3:
+          this.setState({fadeout: 'fade-out'});
+          setTimeout(() => {
+            this.setState({fadeout: '', bannerArt:'images/banner-tunnel.png', paragraphRender: 'rendered', bannerRender: 'hidden'});
+          }, 2000);
+          stage++;
+          break;
+        case 4:
+          this.setState({fadeout: 'fade-out'});
+          setTimeout(() => {
+            this.setState({fadeout: '', currentDialogue:'The Folk listen for you, Bramble Lord.',paragraphRender: 'hidden', bannerRender: 'rendered'});
+          }, 2000);
+          stage++;
+          break;
+        case 5:
+          this.setState({fadeout: 'fade-out'});
+          setTimeout(() => {
+            this.setState({fadeout: '', bannerArt:'images/banner-oberon.png', paragraphRender: 'rendered', bannerRender: 'hidden'});
+          }, 2000);
+          stage++;
+          break;
+        case 6:
+          this.setState({fadeout: 'fade-out'});
+          setTimeout(() => {
+            this.setState({fadeout: '', currentDialogue:'Call to them.', paragraphRender: 'hidden', bannerRender: 'rendered'});
+          }, 2000);
+          stage++;
+          break;
+        case 7:
+          this.setState({fadeout: 'fade-out'});
+          setTimeout(() => {
+            this.setState({ fadeout: '', paragraphRender: 'rendered', bannerRender: 'hidden'});
+          }, 2000);
+          stage++;
+          break;
+        case 8:
+          this.setState({fadeout: 'fade-out'});
+          setTimeout( () => {
+          this.setState({newGame:false,  paragraphRender: 'hidden'});
+          clearInterval(intervalId);
+
+          }, 2000);
+          break;
+        default:
+          clearInterval(intervalId);
+      }
+
+    }, 6000);
+  }
 
   //game loop: runs ever 1 second
   componentDidMount(){
+    if(this.state.newGame === true){
+    this.gameStartCutscene();
+    }
   setInterval(() => {
     //do something
   }, 1000);
 }
+
+
 
  //need a oncomponentdidmount to load state from either cookies or localstorage
  //if that doesn't exist, continue with new game.
@@ -55,14 +139,26 @@ class App extends React.Component {
  //maybe handle button state seperately?
 
   render() {
-  return (
-    <div className="App">
-      <StatsBar {...this.state}/>
-      <Banner bannerImage={this.state.bannerArt}/>
-      <p className="dialogue">{this.state.currentDialogue}</p>
-      <GameButton handleClick={this.changeImage} buttonDesc={this.state.buttonText}/>
-    </div>
-  );
+    if(this.state.newGame === true){
+      return (
+        <div className="App flex-centered">
+          <Banner bannerImage={this.state.bannerArt} render={this.state.bannerRender} fadeout={this.state.fadeout}/>
+          <p className={`dialogue ${this.state.paragraphRender} ${this.state.fadeout}`}>{this.state.currentDialogue}</p>
+        </div>
+      );
+    }
+    else{
+      return (
+        <div className="App flex">
+          <div className="fade-in">
+          <StatsBar {...this.state}/>
+          <Banner bannerImage={this.state.bannerArt} />
+          <p className={`dialogue`}>{this.state.currentDialogue}</p>
+          <GameButton handleClick={this.changeImage} buttonDesc={this.state.buttonText} />
+          </div>
+        </div>
+      );
+    }
   };
 }
 
