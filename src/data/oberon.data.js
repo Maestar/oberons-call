@@ -1,16 +1,18 @@
 const MASTER_BUTTONS = [
     {
-        id: 0,
-        text: 'Call out.',
-        function: 'changeButtons',
-        functionArgs: 1
+       call1: {
+            id: 0,
+            text: 'Call out.',
+        },
+       call2: {
+            id: 1,
+            text: 'Call harder.',
+        },
+       call3: {
+            id: 2,
+            text: 'CALL. THEM.'
+        }
     },
-    {
-        id: 0,
-        text: 'Call out.',
-        function: 'changeButtons',
-        functionArgs: 1
-    }
 ];
 
 export default MASTER_BUTTONS;

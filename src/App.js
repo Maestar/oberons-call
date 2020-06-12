@@ -12,16 +12,19 @@ class App extends React.Component {
 // note: Room state is housed in each room.
 
   state = {
-    'currency':{
-      'gold_count' : 0,
-      'gold_tick' : 0,
-      'wood_count' : 0,
-      'wood_tick' : 0,
-      'stone_count' : 0,
-      'stone_tick' : 0,
-      'glamour_count' : 0,
-    },
-    'location' : 'StartRoom',
+      gold_count : 0,
+      gold_tick : 1,
+      gold_art : 'images/gold-icon.png',
+      wood_count : 0,
+      wood_tick : 0,
+      wood_art : 'images/wood-icon.png',
+      stone_count : 0,
+      stone_tick : 0,
+      stone_art : 'images/stone-icon.png',
+      glamour_count : 0,
+      glamour_art : 'images/glamour-icon.png',
+
+    location : 'OberonRoom',
 
   };
 
@@ -37,9 +40,11 @@ class App extends React.Component {
   //I'll review turning this into a generic function when more game logic exists and I'm
   //certain these will remain similar.
   generateGold = () => {
-    this.setState({'gold_count' : this.state.gold_count + this.state.gold_tick});
+    const current_gold = this.state.gold_count;
+    const new_gold = current_gold + this.state.gold_tick;
+    this.setState({gold_count : new_gold});
   }
-
+/*
   generateWood = () => {
     this.setState({'wood_count' : this.state.wood_count + this.state.wood_tick});
   }
@@ -47,12 +52,12 @@ class App extends React.Component {
   generateStone = () => {
     this.setState({'stone_count' : this.state.stone_count + this.state.wood_tick});
   }
-
+*/
   setGoldTick = (amount) => {
     let newTick = this.state.gold_tick + amount;
     this.setState({'gold_tick' : newTick})
   }
-
+/*
   setWoodTick = (amount) => {
     let newTick = this.state.wood_tick + amount;
     this.setState({'wood_tick' : newTick})
@@ -62,13 +67,17 @@ class App extends React.Component {
     let newTick = this.state.stone_tick + amount;
     this.setState({'stone_tick' : newTick})
   }
-
+*/
+  generateCurrency = () => {
+      this.generateGold();
+     //this.generateWood();
+     // this.generateStone();
+  }
   //##### GAME LOOP #####
   componentDidMount(){
     setInterval(() => {
-      this.generateGold();
-      this.generateWood();
-      this.generateStone();
+      this.generateCurrency();
+      console.log('tick!');
     }, 1000);
   }
 
@@ -76,17 +85,17 @@ class App extends React.Component {
   render() {
     switch(this.state.location){
       case 'StartRoom':
-        return(<div className='app'>
+        return(<div className='App'>
                   <StatsBar {...this.state}/>
                   <StartRoom setLocation={this.setLocation}/>
                </div> );
       case 'OberonRoom':
-        return(<div className='app'>
+        return(<div className='App'>
                   <StatsBar {...this.state}/>
                   <OberonRoom setLocation={this.setLocation}/>
                </div> );
       case 'PuckRoom':
-        return(<div className='app'>
+        return(<div className='App'>
                 <StatsBar {...this.state}/>
                 <PuckRoom setLocation={this.setLocation}/>
               </div>);
