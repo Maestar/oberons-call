@@ -15,7 +15,9 @@ const PuckRoom = (props) => {
         <div className="flex">
             <Banner bannerImage='/images/banner-puck.png' />
             <p className={`dialogue`}>{currentDialogue}</p>
-            {currentButtons.map( (button) => <GameButton key={button.id}  handleClick={button.function} buttonDesc={button.text} /> )}
+            <GameButton type={'location'} onClick={props.setLocation} destination={'OberonRoom'} buttonDesc='Call for Puck' display={true}/>
+            <GameButton type={'currency'} onClick={props.setTick} currency={'stone_tick'} amount={1} currencyMinus={'wood_tick'} amountMinus={-1} buttonDesc='Summon Stone' display={true}/>
+            <GameButton type={'currency'} onClick={props.setTick} currency={'wood_tick'} amount={1} currencyMinus={'stone_tick'} amountMinus={-1} buttonDesc='Summon Wood' display={true}/>
         </div>
     );
 }

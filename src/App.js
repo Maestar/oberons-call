@@ -32,19 +32,20 @@ class App extends React.Component {
   //note: mostly state manipulated that are passed as props
   //i.e. currency generators and location changers.
 
+  //ROOM CHANGE, look
   setLocation = (destination) => {
-    this.setState({location : destination});
+    this.setState({location: destination});
   }
+
 
   //currently these generators are seperate incase they need to become unique in some way.
   //I'll review turning this into a generic function when more game logic exists and I'm
   //certain these will remain similar.
+
   generateGold = () => {
-    const current_gold = this.state.gold_count;
-    const new_gold = current_gold + this.state.gold_tick;
-    this.setState({gold_count : new_gold});
+    this.setState({gold_count : this.state.gold_count + this.state.gold_tick});
   }
-/*
+
   generateWood = () => {
     this.setState({'wood_count' : this.state.wood_count + this.state.wood_tick});
   }
@@ -52,12 +53,23 @@ class App extends React.Component {
   generateStone = () => {
     this.setState({'stone_count' : this.state.stone_count + this.state.wood_tick});
   }
-*/
+
+  setTick = (type, amount, typeMinus, amountMinus) => {
+    if(type != null){
+      let newTick = this.state.type + amount;
+      this.setState({[type]: newTick})
+    }
+    if(typeMinus != null){
+      let newTick = this.state.typeMinus + amountMinus;
+      this.setState({[typeMinus]: newTick})
+    }
+  }
+/*
   setGoldTick = (amount) => {
     let newTick = this.state.gold_tick + amount;
     this.setState({'gold_tick' : newTick})
   }
-/*
+
   setWoodTick = (amount) => {
     let newTick = this.state.wood_tick + amount;
     this.setState({'wood_tick' : newTick})
@@ -70,8 +82,8 @@ class App extends React.Component {
 */
   generateCurrency = () => {
       this.generateGold();
-     //this.generateWood();
-     // this.generateStone();
+     this.generateWood();
+      this.generateStone();
   }
   //##### GAME LOOP #####
   componentDidMount(){
@@ -87,7 +99,7 @@ class App extends React.Component {
       case 'StartRoom':
         return(<div className='App'>
                   <StatsBar {...this.state}/>
-                  <StartRoom setLocation={this.setLocation}/>
+                  <StartRoom setLocation={this.setLocation} />
                </div> );
       case 'OberonRoom':
         return(<div className='App'>
@@ -97,7 +109,7 @@ class App extends React.Component {
       case 'PuckRoom':
         return(<div className='App'>
                 <StatsBar {...this.state}/>
-                <PuckRoom setLocation={this.setLocation}/>
+                <PuckRoom setLocation={this.setLocation} setTick={this.setTick}/>
               </div>);
       default:
         return null;
