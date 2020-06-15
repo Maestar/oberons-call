@@ -21,8 +21,8 @@ const OberonRoom = (props) => {
         <div className="flex">
             <Banner bannerImage='/images/banner-oberon.png' />
             <p className={`dialogue`}>{currentDialogue}</p>
-            <GameButton onClick={changeButton} buttonDesc={currentButtons[0]} display={true}/>
-            <GameButton type={'location'} onClick={props.setLocation} destination={'PuckRoom'} buttonDesc='Call for Puck' display={true}/>
+            <GameButton onClick={changeButton} buttonDesc={currentButtons[0]} display={false}/>
+            <GameButton onClick={() => props.setLocation('PuckRoom')} buttonDesc='Call for Puck' display={true}/>
         </div>
     );
 }

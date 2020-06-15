@@ -3,19 +3,25 @@ import Banner from '../Banner/Banner.component';
 import GameButton from '../GameButton/GameButton.component';
 
 const StartRoom = (props) => {
-    //OberonRoom State using Hooks
+    //startroom State using Hooks
     const [currentDialogue, setcurrentDialogue] = React.useState('');
-    const [currentButtons, setCurrentButtons] = React.useState([]);
     //Props passed from from the Mother State.
 
-    //Functions used by Oberon room
+    //Functions used by start room
+    const newGame = () => {
+        props.setLocation('OberonRoom');
+    }
 
+    const loadGame = () => {
+        return null;
+    }
     //RENDER
     return(
         <div className="flex">
-            <Banner bannerImage='/images/banner-puck.png' />
+            <Banner bannerImage='/images/banner-castle.png' />
             <p className={`dialogue`}>{currentDialogue}</p>
-            {currentButtons.map( (button) => <GameButton key={button.id}  handleClick={button.function} buttonDesc={button.text} /> )}
+            <GameButton onClick={newGame} buttonDesc={'New Game'} display={true}/>
+            <GameButton onClick={loadGame} buttonDesc={'Continue'} display={false}/>
         </div>
     );
 }
