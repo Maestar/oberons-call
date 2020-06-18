@@ -9,7 +9,7 @@ const StartRoom = (props) => {
 
     //Functions used by start room
     const newGame = () => {
-        props.setLocation('OberonRoom');
+        props.setLocation('StartingScene');
     }
 
     const loadGame = () => {
@@ -18,7 +18,7 @@ const StartRoom = (props) => {
     //RENDER
     return(
         <div className="flex">
-            <Banner bannerImage='/images/banner-castle.png' />
+            <Banner bannerImage='/images/title.png' />
             <p className={`dialogue`}>{currentDialogue}</p>
             <GameButton onClick={newGame} buttonDesc={'New Game'} display={true}/>
             <GameButton onClick={loadGame} buttonDesc={'Continue'} display={false}/>

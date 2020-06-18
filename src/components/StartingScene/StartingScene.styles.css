@@ -1,0 +1,35 @@
+.flex-centered{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+
+.fade-in{
+    animation: fadein 2s;
+  }
+
+  .rendered{
+    display: block;
+    animation: fadein 2s;
+
+  }
+
+  @keyframes fadein {
+    from{ opacity: 0;}
+    to {opacity: 1;}
+  }
+
+  .hidden{
+    display: none;
+  }
+
+  .fade-out{
+    animation: fadeout 2s;
+  }
+
+  @keyframes fadeout {
+    from{ opacity: 1;}
+    to {opacity: 0;}
+  }

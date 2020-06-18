@@ -3,6 +3,7 @@ import StatsBar from './components/StatsBar/StatsBar.component';
 import StartRoom from './components/StartRoom/StartRoom.component';
 import OberonRoom from './components/OberonRoom/OberonRoom.component';
 import PuckRoom from './components/PuckRoom/PuckRoom.component';
+import StartingScene from './components/StartingScene/StartingScene.component';
 
 import './App.css';
 
@@ -89,6 +90,10 @@ class App extends React.Component {
         return(<div className='App'>
                   <StartRoom setLocation={this.setLocation} />
                </div> );
+      case 'StartingScene':
+        return(<div className='App flex-centered'>
+                  <StartingScene setLocation={this.setLocation} />
+            </div>);
       case 'OberonRoom':
         return(<div className='App'>
                   <StatsBar {...this.state}/>
