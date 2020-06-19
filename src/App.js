@@ -24,8 +24,14 @@ class App extends React.Component {
       glamour_count : 0,
       glamour_art : 'images/glamour-icon.png',
       puck_gathering: '',
-
-    location : 'StartRoom',
+      oberon_stage : 0,
+      location : 'StartRoom',
+      oberon_room_buttons : {
+        event: true,
+        puck: false,
+        shop: false,
+        missions: false,
+      },
 
   };
 
@@ -40,6 +46,18 @@ class App extends React.Component {
 
   setPuck = (currency) => {
     this.setState({puck_gathering: currency})
+  }
+
+  setButtonStatus = (room, button, flag) => {
+    switch(room){
+      case 'oberon':
+        let buttonState = this.state.oberon_room_buttons;
+        buttonState[button] = flag;
+        this.setState({oberon_room_buttons : buttonState});
+        break;
+      default:
+        break;
+    }
   }
 
   //currently these generators are seperate incase they need to become unique in some way.
@@ -97,7 +115,10 @@ class App extends React.Component {
       case 'OberonRoom':
         return(<div className='App'>
                   <StatsBar {...this.state}/>
-                  <OberonRoom setLocation={this.setLocation}/>
+                  <OberonRoom setLocation={this.setLocation}
+                              oberonStage={this.state.oberon_stage}
+                              buttonStatus={this.oberon_room_buttons}
+                              setButtonStatus={this.setButtonStatus}/>
                </div> );
       case 'PuckRoom':
         return(<div className='App'>
