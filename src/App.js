@@ -13,7 +13,7 @@ class App extends React.Component {
 
   state = {
       gold_count : 0,
-      gold_tick : 1,
+      gold_tick : 0,
       gold_art : 'images/gold-icon.png',
       wood_count : 0,
       wood_tick : 0,
@@ -25,10 +25,11 @@ class App extends React.Component {
       glamour_art : 'images/glamour-icon.png',
       puck_gathering: '',
       oberon_stage : 0,
-      location : 'StartRoom',
+      location : 'OberonRoom',
       oberon_room_buttons : {
         event: true,
         puck: false,
+        purchaseshop: false,
         shop: false,
         missions: false,
       },
@@ -117,7 +118,7 @@ class App extends React.Component {
                   <StatsBar {...this.state}/>
                   <OberonRoom setLocation={this.setLocation}
                               oberonStage={this.state.oberon_stage}
-                              buttonStatus={this.oberon_room_buttons}
+                              buttonStatus={this.state.oberon_room_buttons}
                               setButtonStatus={this.setButtonStatus}/>
                </div> );
       case 'PuckRoom':
