@@ -24,6 +24,7 @@ class App extends React.Component {
       glamour_count : 0,
       glamour_art : 'images/glamour-icon.png',
       puck_gathering: '',
+      workshop_revealed: false,
       oberon_stage : 0,
       location : 'OberonRoom',
       oberon_room_buttons : {
@@ -47,6 +48,10 @@ class App extends React.Component {
 
   setPuck = (currency) => {
     this.setState({puck_gathering: currency})
+  }
+
+  setWorkshopReveal = () => {
+    this.setState({workshop_revealed: true});
   }
 
   setButtonStatus = (room, button, flag) => {
@@ -128,7 +133,12 @@ class App extends React.Component {
                     setLocation={this.setLocation}
                     setTick={this.setTick}
                     setPuck={this.setPuck}
-                    puckGathering={this.state.puck_gathering}/>
+                    puckGathering={this.state.puck_gathering}
+                    oberonStage={this.state.oberon_stage}
+                    workshopStatus={this.state.workshop_revealed}
+                    setWorkshopReveal={this.setWorkshopReveal}
+                    setButtonStatus={this.setButtonStatus}/>
+
               </div>);
       default:
         return null;
